@@ -1,0 +1,39 @@
+/* ==========================================================================
+   LOADER COMPONENT
+   ========================================================================== */
+
+#global-loader {
+  position: fixed;
+  inset: 0; /* top, right, bottom, left = 0 */
+  background-color: var(--color-bg);
+  z-index: var(--z-loader);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* Transición suave de salida estilo Apple (1000ms) */
+  transition: opacity 1s var(--transition-smooth), visibility 1s;
+}
+
+/* Clase que inyectará JS cuando todo cargue */
+#global-loader.is-loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-text {
+  font-family: var(--font-sans);
+  color: var(--color-text-main);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  
+  /* Sutil animación de respiración mientras carga */
+  animation: pulse-opacity 2s infinite ease-in-out;
+}
+
+@keyframes pulse-opacity {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}

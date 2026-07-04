@@ -1,0 +1,46 @@
+/* ==========================================================================
+   CINEMATIC BACKGROUND & LIGHTING
+   ========================================================================== */
+
+/* Contenedor base que envuelve el lienzo */
+#cinematic-stage {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  background-color: var(--color-bg);
+  overflow: hidden;
+  pointer-events: none; /* Nadie interactúa con el fondo */
+}
+
+/* 1. Iluminación Ambiental (Gradiente suave) */
+.ambient-light {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, var(--color-glow) 0%, transparent 60%);
+  opacity: 0.8;
+}
+
+/* 2. Film Grain (Textura elegante sutil) */
+.film-grain {
+  position: absolute;
+  inset: -100%; /* Extra grande para evitar bordes si se mueve */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+
+/* 3. Viñeta Cinematográfica (Oscurece los bordes) */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 40%, rgba(15, 15, 15, 0.9) 100%);
+}
+
+/* 4. Contenedor de Partículas */
+#atmosphere-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-particles);
+  width: 100%;
+  height: 100%;
+}

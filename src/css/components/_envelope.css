@@ -1,0 +1,184 @@
+/* ==========================================================================
+   ENVELOPE COMPONENT (Aislamiento de Capas 3D y GPU)
+   ========================================================================== */
+
+/* 1. FORZAMOS AL ESCENARIO DE FONDO A QUEDARSE EN SU PROPIA CAPA TRASERA */
+#cinematic-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 1 !important;
+  pointer-events: none;
+  /* El truco maestro: forzamos aceleración de hardware independiente para el fondo */
+  transform: translateZ(0); 
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* 2. AISLAMIENTO DEL CONTENEDOR DE LA APP */
+#app {
+  position: relative;
+  z-index: 2 !important;
+  background: transparent !important;
+}
+
+/* Centrado absoluto de la sección del sobre */
+#envelope-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent !important;
+}
+
+/* Contenedor Base del Sobre */
+.envelope-wrapper {
+  position: relative;
+  width: min(85vw, 600px);
+  aspect-ratio: 3 / 2;
+  background: transparent !important;
+  
+  /* Perspectiva y renderizado 3D plano para evitar traspasar capas del DOM */
+  perspective: 1200px; 
+  transform-style: preserve-3d;
+  transform: translateZ(0); /* Evita que parpadee al animarse */
+
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 
+              0 0 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s var(--transition-smooth);
+}
+
+/* Textura de papel premium */
+.envelope-base,
+.envelope-flap {
+  position: absolute;
+  inset: 0;
+  background-color: #f4efeb;
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.02) 100%);
+  /* Evita que las solapas decorativas bloqueen los clics del ratón */
+  pointer-events: none; 
+}
+
+/* Fondo del sobre (parte trasera interior) */
+.envelope-base {
+  background-color: #e6dfd8;
+  border-radius: var(--radius-sm);
+}
+
+/* --- GEOMETRÍA DE LAS SOLAPAS (CLIP-PATH) --- */
+
+.flap-left {
+  clip-path: polygon(0 0, 50% 50%, 0 100%);
+  filter: drop-shadow(5px 0 5px rgba(0,0,0,0.05));
+}
+.flap-right {
+  clip-path: polygon(100% 0, 50% 50%, 100% 100%);
+  filter: drop-shadow(-5px 0 5px rgba(0,0,0,0.05));
+}
+
+/* Solapa Superior (Cerrada, apunta hacia abajo) */
+.flap-top {
+  clip-path: polygon(0 0, 50% 55%, 100% 0);
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0.05) 100%);
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  z-index: 10;
+}
+
+/* Solapa Inferior (BOTÓN INTERACTIVO) */
+.flap-bottom {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  clip-path: polygon(0 100%, 50% 45%, 100% 100%);
+  background-image: linear-gradient(0deg, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0.08) 100%);
+  z-index: 5;
+  transition: filter 0.3s ease;
+  cursor: pointer;
+  /* El botón inferior SÍ debe capturar eventos del mouse y teclado */
+  pointer-events: auto; 
+}
+
+/* Hover State de la zona interactiva */
+.flap-bottom:hover,
+.flap-bottom:focus-visible {
+  filter: brightness(1.05);
+  outline: none;
+}
+
+/* Accesibilidad: Indicador visual al navegar por teclado (Tab) */
+.flap-bottom:focus-visible::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 4px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+/* Sello decorativo */
+.envelope-seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-full);
+}
+
+/* --- ELEMENTOS INTERNOS DEL SOBRE --- */
+
+/* Luz interior */
+.inner-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center 30%, rgba(255, 248, 235, 0.8) 0%, transparent 70%);
+  opacity: 0;
+  z-index: 2;
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+}
+
+/* La Carta Premium */
+/* La Carta Premium (Diseño Físico) */
+.letter {
+  position: absolute;
+  top: 2%; left: 2%; right: 2%; bottom: 2%;
+  /* Color crema muy puro */
+  background-color: #FAFAFA;
+  border-radius: 4px;
+  
+  /* Textura de papel premium mediante CSS puro (luces, sombras y micro-ruido) */
+  background-image: 
+    linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(245,242,238,1) 100%),
+    repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.01) 2px, rgba(0,0,0,0.01) 4px);
+  
+  /* Sombra inicial suave */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  z-index: 3;
+  pointer-events: none;
+  
+  /* CRÍTICO: Origen en el centro para que el despliegue (escala) sea simétrico */
+  transform-origin: center center;
+  /* Suavizado en hardware para evitar bordes dentados al escalar */
+  will-change: transform, box-shadow;
+}
+
+/* --- ANIMACIÓN DE VIBRACIÓN (ERROR) --- */
+.is-vibrating {
+  animation: gentle-shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes gentle-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px) rotate(-1deg); }
+  40% { transform: translateX(4px) rotate(1deg); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}

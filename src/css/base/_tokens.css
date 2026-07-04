@@ -1,0 +1,54 @@
+/* ==========================================================================
+   DESIGN SYSTEM TOKENS (Variables Globales)
+   ========================================================================== */
+
+:root {
+  /* --- Paleta de Colores (Cinematic Dark Mode) --- */
+  --color-bg: #0F0F0F;          /* Negro profundo cinematográfico */
+  --color-text-main: #F3F3F3;   /* Blanco humo para textos futuros */
+  --color-text-muted: #888888;
+  --color-accent: #b85c5c;      /* Rojo elegante para corazones sutiles */
+  --color-glow: rgba(184, 92, 92, 0.15); /* Luz ambiental */
+
+  /* --- Fuentes del Sistema --- */
+  --font-serif-display: 'Playfair Display', serif; /* Títulos cinematográficos */
+  --font-serif-body: 'Cormorant Garamond', serif;  /* Texto de la carta (elegante, manuscrito impreso) */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif; /* UI y navegación estilo Apple */
+  --font-accent: 'Dancing Script', cursive;       /* Firmas o notas ultra-personales marginales */
+
+  /* --- Sistema de Espaciados (Basado en múltiplos de 4/8) --- */
+  --space-xs: 0.25rem;  /* 4px */
+  --space-sm: 0.5rem;   /* 8px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+  --space-2xl: 4rem;    /* 64px */
+  --space-3xl: 8rem;    /* 128px */
+
+  /* --- Bordes y Sombras Premium (Efecto Elevación Sutil) --- */
+  --radius-sm: 4px;
+  --radius-md: 8px;     /* Estilo contenedores Notion */
+  --radius-lg: 16px;    /* Estilo tarjetas de UI Apple */
+  --radius-full: 9999px;
+
+  --shadow-premium: 0 4px 30px rgba(0, 0, 0, 0.02),
+                    0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-overlay: 0 20px 40px rgba(0, 0, 0, 0.04);
+
+  /* --- Curvas de Animación Cinematográficas (Easing Apple/GSAP) --- */
+  --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* Custom easeOutExponential */
+  --transition-interactive: 0.3s cubic-bezier(0.25, 1, 0.5, 1); /* Para hovers rápidos */
+
+  /* --- Arquitectura de Capas (Z-Index estricto) --- */
+  --z-bg: 0;
+  --z-particles: 10;
+  --z-decorations: 20;
+  --z-content: 30;
+  --z-loader: 40;
+  --z-modal: 50;
+  --z-cursor: 60;
+
+  /* --- Dimensiones --- */
+  --max-width-content: 680px; /* Ancho de lectura óptimo tipo Notion para la carta */
+  --max-width-site: 1200px;   /* Límite para galerías o grids */
+}

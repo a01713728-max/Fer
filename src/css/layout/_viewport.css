@@ -1,0 +1,39 @@
+/* ==========================================================================
+   LAYOUT GLOBAL & VIEWPORT CONTROL
+   ========================================================================== */
+
+/* Contenedor principal de la aplicación (Inyectado en index.html) */
+#app {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Formato para cada Acto o Sección Cinematográfica */
+section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: var(--space-2xl) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Evita scrolls fantasma debido a animaciones que entran de los lados */
+}
+
+/* Enfoque del Layout Container estándar (Pinterest & Apple Content Width) */
+.layout-container {
+  width: 100%;
+  max-width: var(--max-width-site);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Enfoque para bloques de texto puros (Lectura íntima estilo Notion) */
+.reading-container {
+  width: 100%;
+  max-width: var(--max-width-content);
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,89 @@
+/* ==========================================================================
+   MODERN RESET
+   ========================================================================== */
+
+/* Reseteo del Box Model estricto */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Configuración raíz del Viewport y Accesibilidad */
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  /* El scroll-behavior dinámico lo manejará Lenis por JS, aquí lo dejamos aislado */
+  scroll-behavior: auto;
+  background-color: var(--color-bg);
+}
+
+/* Configuración base del Body */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-text-main);
+  background-color: var(--color-bg);
+  overflow-x: hidden;
+}
+
+/* Bloques e imágenes responsivas */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Elementos interactivos limpios por defecto */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+}
+
+button,
+select {
+  text-transform: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor:not-allowed;
+}
+
+/* Enlaces limpios */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Listas sin viñetas por defecto (frecuentes en UI/Líneas de tiempo) */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Color de selección romántico y sutil para la experiencia */
+::-webkit-selection {
+  background-color: var(--color-accent-light);
+  color: var(--color-accent);
+}
+::selection {
+  background-color: var(--color-accent-light);
+  color: var(--color-accent);
+}

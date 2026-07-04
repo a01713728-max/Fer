@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Nuestra Historia — Una Experiencia Inmersiva</title>
+  <meta name="description" content="Un viaje cinematográfico a través de nuestros momentos más especiales. Un aniversario inolvidable.">
+  <link rel="icon" type="image/svg+xml" href="/src/assets/icons/favicon.svg" />
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nuestra Historia — Una Experiencia Inmersiva">
+  <meta property="og:description" content="Un viaje cinematográfico a través de nuestros momentos más especiales.">
+  <meta property="og:image" content="/src/assets/images/og-share.jpg">
+
+  <link rel="stylesheet" href="/src/css/main.css">
+</head>
+<body>
+
+
+  <div id="global-loader" role="dialog" aria-live="polite" aria-busy="true" aria-label="Cargando experiencia">
+    <div class="loader-content">
+      <span class="loader-text">Cargando nuestra historia...</span>
+    </div>
+  </div>
+
+  <div id="cinematic-stage" aria-hidden="true">
+    <div class="ambient-light"></div>
+    <div class="film-grain"></div>
+    <div class="vignette"></div>
+    <canvas id="atmosphere-canvas"></canvas>
+  </div>
+
+  <header id="ui-header">
+    </header>
+
+  <main id="app" aria-hidden="true"> 
+    <section id="intro-section" aria-label="Introducción">
+      </section>
+
+    <section id="story-section" aria-label="Nuestra Historia">
+      </section>
+
+    <section id="gallery-section" aria-label="Galería de Recuerdos">
+      </section>
+
+    <section id="interactive-section" aria-label="Interacciones Especiales">
+      </section>
+
+    <section id="envelope-section" aria-label="El Sobre">
+      
+      <div id="envelope-container" class="envelope-wrapper">
+        
+        <div class="envelope-base"></div>
+        <div class="inner-glow"></div>
+        
+        <div class="letter" aria-hidden="true">
+          <article class="letter-content" aria-live="polite"></article>
+        </div>
+        <div class="envelope-flap flap-left"></div>
+        <div class="envelope-flap flap-right"></div>
+        <div class="envelope-flap flap-top"></div>
+        
+        <button id="envelope-correct-zone" class="envelope-flap flap-bottom" aria-label="Abrir sobre" tabindex="0">
+          <div class="envelope-seal"></div>
+        </button>
+
+      </div>
+
+    </section>
+
+    <article id="letter-section" aria-label="Carta de Aniversario">
+      </article>
+
+    <section id="final-section" aria-label="Escena Final">
+      </section>
+
+  </main>
+
+  <footer id="ui-footer">
+    </footer>
+
+  <script type="module" src="/src/js/main.js"></script>
+
+    <div id="finale-phrases" class="finale-phrases" aria-hidden="true">
+  <p class="finale-phrase">Gracias por ser parte de mi vida.</p>
+  <p class="finale-phrase">Te elegiría hoy.</p>
+  <p class="finale-phrase">Mañana.</p>
+  <p class="finale-phrase">Y todas las veces que hiciera falta.</p>
+</div>
+
+</body>
+<audio id="bg-music" src="public/music/fondo.mp3" loop preload="auto"></audio>
+
+<button id="music-toggle" class="music-toggle" aria-label="Reproducir música" aria-pressed="false" hidden>
+  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M8 5v14l11-7z" />
+  </svg>
+  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+  </svg>
+</button>
+</html>

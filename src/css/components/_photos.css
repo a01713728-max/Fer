@@ -1,0 +1,83 @@
+/* ==========================================================================
+   PHOTOS COMPONENT (Recuerdos Físicos)
+   ========================================================================== */
+
+.memory-group {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3.5rem auto 2rem auto; /* Separación elegante del texto */
+  width: 100%;
+  /* Min-height crítico para evitar que el absolute overlap colapse en móviles */
+  min-height: 420px; 
+}
+
+.photo-print {
+  position: absolute; /* Permite la superposición libre */
+  background-color: #FAFAFA;
+  padding: 6px; /* Borde blanco muy fino y elegante */
+  border-radius: 2px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.03);
+  
+  /* Tamaños base respetando el Layout de la carta */
+  width: 45%;
+  max-width: 220px;
+  
+  /* Variables que inyectará GSAP */
+  --x: 0%;
+  --y: 0px;
+  --scale: 1;
+  --rot: 0deg;
+  
+  /* Hardware acceleration */
+  transform: translate(var(--x), var(--y)) scale(var(--scale)) rotate(var(--rot));
+  will-change: transform, box-shadow, opacity;
+  cursor: pointer;
+}
+
+/* Micro-textura sobre el papel fotográfico (Opcional, suma nivel premium) */
+.photo-print::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.01) 2px, rgba(0,0,0,0.01) 4px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.photo-print img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 912 / 1600; /* Ratio estricto solicitado */
+  object-fit: contain;
+  border-radius: 1px;
+  pointer-events: none; /* Evita que el usuario arrastre la imagen por error */
+}
+/* Variante para la fotografía destacada */
+.memory-group--featured {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.memory-group--featured .photo-print {
+  max-width: 85%; /* Se hace mucho más grande que las regulares (que suelen ser del 40-50%) */
+  /* Mantén el padding blanco, el box-shadow y el background del .photo-print existente */
+}
+
+/* Si tu CSS no lo tiene ya, asegurar que la imagen mantenga su ratio */
+.memory-group--featured .photo-print img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 912 / 1600; /* Evita reflows mientras carga */
+  object-fit: cover;
+}
+
+/* Responsive: Ajustes para que no tapen el texto en móviles */
+@media (max-width: 768px) {
+  .memory-group { min-height: 320px; margin: 2rem auto; }
+  .photo-print { width: 55%; max-width: 180px; }
+}

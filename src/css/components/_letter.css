@@ -1,0 +1,168 @@
+/* ==========================================================================
+   LETTER COMPONENT (Contenido Revelado)
+   ========================================================================== */
+
+/* ==========================================================================
+   LETTER COMPONENT (Contenedor Principal)
+   ========================================================================== */
+
+.letter {
+  /* Tus estilos existentes (background, box-shadow, etc) */
+  background: #faf8f5;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  
+  /* ✅ Lo que pides */
+  height: auto;           /* Permite crecimiento orgánico */
+  min-height: 100%;       /* Cubre el sobre inicialmente */
+  overflow: visible;      /* No corta contenido */
+  
+  /* Opcional: para mejor transición */
+  transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.letter-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 12% 10%;
+  box-sizing: border-box;
+  /* Centrado elegante, sin tocar los bordes */
+  max-width: 65ch;
+  margin: 0 auto;
+}
+
+/* Tipografía de la carta */
+.letter-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  /* Cambiamos la variable global por un color específico para la "tinta" */
+  color: #2c2a29; /* Un gris carbón muy oscuro y elegante */
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.letter-greeting {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  /* Tinta fuerte para el saludo */
+  color: #3d3b3a; 
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.letter-paragraph {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  /* Tinta un poco más suave para lectura prolongada */
+  color: #4a4846; 
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* =========================================
+   VARIANTE: FOTOGRAFÍA PROTAGONISTA (FASE 16)
+   ========================================= */
+
+.memory-group--featured {
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Aquí es donde la hacemos grandota */
+.memory-group--featured .photo-print {
+  width: 85%; /* Toma casi todo el ancho de la carta */
+  max-width: 500px; /* Un límite seguro para pantallas de escritorio */
+  height: auto; /* Anulamos cualquier altura fija que tuvieran las otras fotos */
+}
+
+/* Aseguramos que la imagen respete su formato original (912x1600) */
+.memory-group--featured .photo-print img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 912 / 1600;
+  object-fit: cover;
+  display: block;
+}
+
+/* =========================================
+   CONTROLES DE MÚSICA
+   ========================================= */
+.music-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  backdrop-filter: blur(4px);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.music-toggle:hover {
+  background: rgba(0, 0, 0, 0.4);
+  transform: scale(1.05);
+}
+
+.music-toggle[hidden] {
+  display: none;
+}
+
+.music-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Lógica visual de los iconos basada en el estado de accesibilidad */
+.music-toggle[aria-pressed="false"] .icon-pause { display: none; }
+.music-toggle[aria-pressed="true"] .icon-play { display: none; }
+
+/* =========================================
+   TEXTOS DEL DESENLACE (FASE 18)
+   ========================================= */
+.finale-phrases {
+  position: fixed;
+  bottom: 12vh;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+  pointer-events: none; /* No interfieren con el ratón */
+}
+
+.finale-phrase {
+  position: absolute;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 300;
+  letter-spacing: 1px;
+  opacity: 0; /* Ocultas por defecto */
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+  transform: translateY(10px);
+}
